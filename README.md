@@ -1,25 +1,22 @@
 # Mini SOC Case System
 
-Code:You SecOps Assignment 8 — build SOC cases from security artifacts pulled via API.
+Assignment 8 for Code:You SecOps. `soc_case_builder.py` pulls security artifacts from a Mockaroo API, groups them into cases, and writes `case_report.txt`.
 
-## Description
-Fetches artifact records from a Mockaroo endpoint, models them with Python classes/enums, groups artifacts into cases, recalculates severity (hash → HIGH; external IP / suspicious domain → MEDIUM; else LOW), sorts by severity, and writes a human-readable report.
-
-## Technologies
-- Python 3, `requests`, standard library (`enum`, `datetime`)
+A case is HIGH when it contains a hash, MEDIUM when it has an external IP or a suspicious domain (the name includes "login", "verify", or "secure"), and LOW otherwise. Printed summaries are sorted HIGH, then MEDIUM, then LOW.
 
 ## Setup
+
 ```bash
 python3 -m pip install requests
 export MOCKAROO_API_KEY="your_key_here"
 ```
-The script reads `MOCKAROO_API_KEY` from the environment and exits with an error if it is missing.
+
+The script reads `MOCKAROO_API_KEY` from the environment and exits if it is missing.
 
 ## Usage
+
 ```bash
 python3 soc_case_builder.py
 ```
-Output: `case_report.txt`
 
-## Status
-Completed course assignment.
+The report is written to `case_report.txt`.
