@@ -1,51 +1,25 @@
-# SOC Case Builder
+# Mini SOC Case System
 
-Assignment 8 for Code:You SecOps Python course.
+Code:You SecOps Assignment 8 — build SOC cases from security artifacts pulled via API.
 
-## What It Does
+## Description
+Fetches artifact records from a Mockaroo endpoint, models them with Python classes/enums, groups artifacts into cases, recalculates severity (hash → HIGH; external IP / suspicious domain → MEDIUM; else LOW), sorts by severity, and writes a human-readable report.
 
-This script pulls security artifact data from a Mockaroo API, models it using Python classes, groups artifacts into cases, recalculates severity based on the type of evidence, and writes a human-readable report.
+## Technologies
+- Python 3, `requests`, standard library (`enum`, `datetime`)
 
-## API Endpoint
-
-- **URL:** https://my.api.mockaroo.com/ironclad-soc-case-artifacts
-- **Method:** GET
-- **Key:** set the `MOCKAROO_API_KEY` environment variable (example: `your_key_here`)
-
-## JSON Field Mapping
-
-| API Field | Python Attribute | Description |
-|-----------|-----------------|-------------|
-|  |  | Groups artifacts into the same case |
-|  |  | Type of evidence (ip, domain, file_hash) |
-|  /  /  |  | The actual IOC value, pulled dynamically based on  |
-|  |  | Analyst notes or context |
-
-## Severity Rules
-
-| Severity | Condition |
-|----------|-----------|
-| **HIGH** | Any  artifact present |
-| **MEDIUM** | External IP or suspicious domain (contains "login", "verify", "secure") |
-| **LOW** | Everything else |
-
-## Challenges Completed
-
-- **A:**  Enum — converts raw strings into typed enum values
-- **B:**  rule — HIGH severity cases must go to  before closing
-- **C:**  — returns deduplicated list of IOCs per case
-- **D:** Sort cases by severity (HIGH → MEDIUM → LOW)
-- **E:**  — calculates age since oldest artifact timestamp
-
-## How to Run
-
+## Setup
 ```bash
-export MOCKAROO_API_KEY=your_key_here
-python soc_case_builder.py
+python3 -m pip install requests
+export MOCKAROO_API_KEY="your_key_here"
 ```
-
 The script reads `MOCKAROO_API_KEY` from the environment and exits with an error if it is missing.
 
-## Output Files
+## Usage
+```bash
+python3 soc_case_builder.py
+```
+Output: `case_report.txt`
 
--  — generated report with all case details
+## Status
+Completed course assignment.
