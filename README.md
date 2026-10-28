@@ -13,6 +13,7 @@ Fetches artifact records from a Mockaroo endpoint, models them with Python class
 python3 -m pip install requests
 export MOCKAROO_API_KEY="your_key_here"
 ```
+The script reads `MOCKAROO_API_KEY` from the environment and exits with an error if it is missing.
 
 ## Usage
 ```bash

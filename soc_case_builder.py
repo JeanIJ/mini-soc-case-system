@@ -4,7 +4,12 @@ from enum import Enum
 from datetime import datetime
 
 API_URL = "https://my.api.mockaroo.com/ironclad-soc-case-artifacts"
-API_KEY = os.environ.get("MOCKAROO_API_KEY", "cf7bbbd0")
+API_KEY = os.environ.get("MOCKAROO_API_KEY", "").strip()
+if not API_KEY:
+    raise SystemExit(
+        "Error: MOCKAROO_API_KEY is not set. "
+        "Export it before running this script."
+    )
 headers = {"X-API-Key": API_KEY}
 
 response = requests.get(API_URL, headers=headers, timeout=10)
