@@ -10,7 +10,7 @@ This script pulls security artifact data from a Mockaroo API, models it using Py
 
 - **URL:** https://my.api.mockaroo.com/ironclad-soc-case-artifacts
 - **Method:** GET
-- **Key:** cf7bbbd0
+- **Key:** set the `MOCKAROO_API_KEY` environment variable (example: `your_key_here`)
 
 ## JSON Field Mapping
 
@@ -39,7 +39,12 @@ This script pulls security artifact data from a Mockaroo API, models it using Py
 
 ## How to Run
 
+```bash
+export MOCKAROO_API_KEY=your_key_here
+python soc_case_builder.py
+```
 
+The script reads `MOCKAROO_API_KEY` from the environment and exits with an error if it is missing.
 
 ## Output Files
 
